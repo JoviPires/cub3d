@@ -61,6 +61,18 @@ char	*set_line(char **backup);
 char	*get_next_line(int fd);
 int		count_lines(char *file);
 
+/*--- parse_elements.c ---*/
+int		parse_element(char *line, t_scene *scene);
+int		parse_texture(char *line, char **dest);
+int		parse_color_line(char *line, t_color *color);
+int		is_element(char *line);
+
+/*--- parse_color.c ---*/
+int		parse_color(char *str, t_color *color);
+int		validate_rgb(char *str);
+int		count_parts(char **parts);
+void	free_split(char **parts);
+
 /*--- error.c ---*/
 int		err_exit(char *msg, t_scene *scene);
 void	free_scene(t_scene *scene);
