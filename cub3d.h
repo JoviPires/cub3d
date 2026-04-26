@@ -83,4 +83,13 @@ int		err_exit(char *msg, t_scene *scene);
 void	free_scene(t_scene *scene);
 void	free_grid(char **grid, int height);
 
+/*--- validate_map.c ---*/
+int		validate_map(t_map *map);
+int		check_chars_and_spawn(t_map *map);
+
+/*--- flood_fill.c ---*/
+int		check_closed(t_map *map);
+int		flood_fill(char **grid, int x, int y, t_map *map);
+char	**copy_grid(char **grid, int height);
+
 #endif
