@@ -61,4 +61,9 @@ char	*set_line(char **backup);
 char	*get_next_line(int fd);
 int		count_lines(char *file);
 
+/*--- error.c ---*/
+int		err_exit(char *msg, t_scene *scene);
+void	free_scene(t_scene *scene);
+void	free_grid(char **grid, int height);
+
 #endif
