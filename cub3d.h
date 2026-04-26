@@ -23,6 +23,35 @@
 
 # define BUFFER_SIZE 1024
 
+typedef struct s_color
+{
+	int		r;
+	int		g;
+	int		b;
+	int		set;
+}	t_color;
+
+typedef struct s_map
+{
+	char	**grid;
+	int		width;
+	int		height;
+	double	player_x;
+	double	player_y;
+	char	player_dir;
+}	t_map;
+
+typedef struct s_scene
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	t_color	floor;
+	t_color	ceiling;
+	t_map	map;
+}	t_scene;
+
 /*--- check_map.c ---*/
 int		check_cub(const char *file);
 
