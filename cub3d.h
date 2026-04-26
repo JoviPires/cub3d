@@ -61,6 +61,11 @@ char	*set_line(char **backup);
 char	*get_next_line(int fd);
 int		count_lines(char *file);
 
+/*--- parse_file.c ---*/
+int		parse_file(char *file, t_scene *scene);
+int		dispatch_line(char *line, t_scene *scene, int *map_started);
+int		is_empty_line(char *line);
+
 /*--- parse_map.c ---*/
 int		parse_map_lines(char *file, t_scene *scene);
 int		build_grid(t_list *lines, t_map *map);

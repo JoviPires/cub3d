@@ -12,34 +12,42 @@
 
 #include "../cub3d.h"
 
+static void	print_scene(t_scene *scene)
+{
+	int	i;
+
+	printf("NO: %s\n", scene->no);
+	printf("SO: %s\n", scene->so);
+	printf("WE: %s\n", scene->we);
+	printf("EA: %s\n", scene->ea);
+	printf("F:  %d,%d,%d\n", scene->floor.r, scene->floor.g, scene->floor.b);
+	printf("C:  %d,%d,%d\n", scene->ceiling.r, scene->ceiling.g,
+		scene->ceiling.b);
+	printf("Spawn: %c at (%.1f, %.1f)\n", scene->map.player_dir,
+		scene->map.player_x, scene->map.player_y);
+	printf("Map (%dx%d):\n", scene->map.width, scene->map.height);
+	i = -1;
+	while (++i < scene->map.height)
+		printf("[%s]\n", scene->map.grid[i]);
+}
+
 int	main(int argc, char **argv)
 {
-	int		fd;
-	char	*line;
+	t_scene	scene;
 
 	if (argc != 2)
 	{
-		printf("Error\nUsage: ./cub3d map.cub\n");
+		ft_putstr_fd("Error\nUsage: ./cub3d map.cub\n", 2);
 		return (1);
 	}
 	if (!check_cub(argv[1]))
 	{
-		printf("Error\nFile must be .cub\n");
+		ft_putstr_fd("Error\nFile must be .cub\n", 2);
 		return (1);
 	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-	{
-		printf("Error\nFailed to open file\n");
+	if (parse_file(argv[1], &scene))
 		return (1);
-	}
-	line = get_next_line(fd);
-	while (line)
-	{
-		printf("%s", line);
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
+	print_scene(&scene);
+	free_scene(&scene);
 	return (0);
 }

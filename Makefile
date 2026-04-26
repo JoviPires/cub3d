@@ -1,6 +1,9 @@
 NAME = cub3d
 
-SRC = src/main.c src/check_map.c src/gnl.c
+SRC = src/main.c src/check_map.c src/gnl.c \
+      src/parse_file.c src/parse_elements.c src/parse_color.c \
+      src/parse_map.c src/validate_map.c src/flood_fill.c \
+      src/error.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc
@@ -13,7 +16,7 @@ LIBFT_LIB = $(LIBFT_DIR)/libft.a
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C $(LIBFT_DIR) bonus
 	$(MAKE) -C minilibx-linux
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(MLX)
 
