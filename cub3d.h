@@ -61,6 +61,11 @@ char	*set_line(char **backup);
 char	*get_next_line(int fd);
 int		count_lines(char *file);
 
+/*--- parse_map.c ---*/
+int		parse_map_lines(char *file, t_scene *scene);
+int		build_grid(t_list *lines, t_map *map);
+char	*pad_line(char *line, int width);
+
 /*--- parse_elements.c ---*/
 int		parse_element(char *line, t_scene *scene);
 int		parse_texture(char *line, char **dest);
