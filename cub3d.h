@@ -52,6 +52,20 @@ typedef struct s_scene
 	t_map	map;
 }	t_scene;
 
+typedef struct s_game
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*img_data;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		width;
+	int		height;
+	t_scene	scene;
+}	t_game;
+
 /*--- check_map.c ---*/
 int		check_cub(const char *file);
 
@@ -82,6 +96,9 @@ int		parse_color(char *str, t_color *color);
 int		validate_rgb(char *str);
 int		count_parts(char **parts);
 void	free_split(char **parts);
+
+/*--- game.c ---*/
+void	game_init(t_game *game);
 
 /*--- error.c ---*/
 int		err_exit(char *msg, t_scene *scene);
