@@ -33,7 +33,7 @@ static void	print_scene(t_scene *scene)
 
 int	main(int argc, char **argv)
 {
-	t_scene	scene;
+	t_game	game;
 
 	if (argc != 2)
 	{
@@ -45,9 +45,10 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Error\nFile must be .cub\n", 2);
 		return (1);
 	}
-	if (parse_file(argv[1], &scene))
+	if (parse_file(argv[1], &game.scene))
 		return (1);
-	print_scene(&scene);
-	free_scene(&scene);
+	game_init(&game);
+	print_scene(&game.scene);
+	free_scene(&game.scene);
 	return (0);
 }
