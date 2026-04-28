@@ -48,7 +48,9 @@ int	main(int argc, char **argv)
 	if (parse_file(argv[1], &game.scene))
 		return (1);
 	game_init(&game);
-	print_scene(&game.scene);
-	free_scene(&game.scene);
+	mlx_hook(game.win, 2, 1L << 0, handle_key_press, &game);
+	mlx_hook(game.win, 17, 0, close_window, &game);
+	mlx_loop_hook(game.mlx, render, &game);
+	mlx_loop(game.mlx);
 	return (0);
 }
