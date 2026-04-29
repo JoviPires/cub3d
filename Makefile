@@ -3,7 +3,7 @@ NAME = cub3d
 SRC = src/main.c src/check_map.c src/gnl.c \
       src/parse_file.c src/parse_elements.c src/parse_color.c \
       src/parse_map.c src/validate_map.c src/flood_fill.c \
-      src/error.c src/game.c
+      src/error.c src/game.c src/events.c src/render.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc

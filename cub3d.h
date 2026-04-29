@@ -22,6 +22,7 @@
 # include <X11/keysym.h>
 
 # define BUFFER_SIZE 1024
+# define KEY_ESC 65307
 
 typedef struct s_color
 {
@@ -99,6 +100,14 @@ void	free_split(char **parts);
 
 /*--- game.c ---*/
 void	game_init(t_game *game);
+
+/*--- events.c ---*/
+int		handle_key_press(int keycode, t_game *game);
+int		close_window(t_game *game);
+
+/*--- render.c ---*/
+int		render(t_game *game);
+void	put_pixel(t_game *game, int x, int y, int color);
 
 /*--- error.c ---*/
 int		err_exit(char *msg, t_scene *scene);
