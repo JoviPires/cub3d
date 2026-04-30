@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <math.h>
 
 # define BUFFER_SIZE 1024
 # define KEY_ESC 65307
@@ -64,8 +65,33 @@ typedef struct s_game
 	int		endian;
 	int		width;
 	int		height;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 	t_scene	scene;
 }	t_game;
+
+typedef struct s_ray
+{
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+}	t_ray;
 
 /*--- check_map.c ---*/
 int		check_cub(const char *file);
@@ -108,6 +134,10 @@ int		close_window(t_game *game);
 /*--- render.c ---*/
 int		render(t_game *game);
 void	put_pixel(t_game *game, int x, int y, int color);
+void	draw_column(t_game *game, t_ray *ray, int x);
+
+/*--- raycasting.c ---*/
+void	cast_rays(t_game *game);
 
 /*--- error.c ---*/
 int		err_exit(char *msg, t_scene *scene);
