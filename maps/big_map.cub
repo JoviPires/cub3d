@@ -3,8 +3,8 @@ SO texture_south.xpm
 WE texture_west.xpm
 EA texture_east.xpm
 
-F 220,100,0
-C 225,30,0
+F 72,111,56
+C 130,200,229
 
 1111111111111111111111111
 1000000000110000000000001
