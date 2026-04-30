@@ -1,10 +1,10 @@
-NO texture_north.xpm
-SO texture_south.xpm
-WE texture_west.xpm
-EA texture_east.xpm
+NO textures/dungeon_north.xpm
+SO textures/dungeon_south.xpm
+WE textures/dungeon_west.xpm
+EA textures/dungeon_east.xpm
 
-F 100,100,100
-C 180,180,255
+F 50,40,30
+C 40,40,50
 
 11111111111111111111
 1E000000100000000001
