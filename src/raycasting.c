@@ -91,6 +91,8 @@ static void	calc_wall(t_ray *ray, t_game *game)
 	if (ray->perp_wall_dist < 0.0001)
 		ray->perp_wall_dist = 0.0001;
 	ray->line_height = (int)(game->height / ray->perp_wall_dist);
+	if (ray->line_height < 1)
+		ray->line_height = 1;
 	ray->draw_start = -ray->line_height / 2 + game->height / 2;
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
