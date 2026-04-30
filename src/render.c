@@ -6,7 +6,7 @@
 /*   By: jpires-n <jpires-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 19:09:14 by jpires-n          #+#    #+#             */
-/*   Updated: 2026/04/28 21:25:21 by jpires-n         ###   ########.fr       */
+/*   Updated: 2026/04/29 21:54:26 by jpires-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,38 +29,41 @@ static int	rgb_to_int(t_color color)
 	return (color.r << 16 | color.g << 8 | color.b);
 }
 
-static int	get_wall_color(t_ray *ray)
+static void	draw_wall_stripe(t_game *game, t_ray *ray, int x)
 {
-	if (ray->side == 0 && ray->ray_dir_x > 0)
-		return (0xCC3333);
-	if (ray->side == 0 && ray->ray_dir_x <= 0)
-		return (0x33CC33);
-	if (ray->side == 1 && ray->ray_dir_y > 0)
-		return (0x3333CC);
-	return (0xCCCC33);
+	int		tex_i;
+	int		tex_x;
+	int		y;
+	double	step;
+	double	tex_pos;
+
+	tex_i = get_tex_index(ray);
+	tex_x = get_tex_x(game, ray, tex_i);
+	step = 1.0 * game->tex[tex_i].height / ray->line_height;
+	tex_pos = (ray->draw_start - game->height / 2
+			+ ray->line_height / 2) * step;
+	y = ray->draw_start;
+	while (y <= ray->draw_end)
+	{
+		put_pixel(game, x, y, get_tex_pixel(&game->tex[tex_i],
+				tex_x, (int)tex_pos % game->tex[tex_i].height));
+		tex_pos += step;
+		y++;
+	}
 }
 
 void	draw_column(t_game *game, t_ray *ray, int x)
 {
-	int	ceil_c;
-	int	floor_c;
-	int	wall_c;
 	int	y;
 
-	ceil_c = rgb_to_int(game->scene.ceiling);
-	floor_c = rgb_to_int(game->scene.floor);
-	wall_c = get_wall_color(ray);
 	y = -1;
 	while (++y < ray->draw_start)
-		put_pixel(game, x, y, ceil_c);
-	while (y <= ray->draw_end)
-	{
-		put_pixel(game, x, y, wall_c);
-		y++;
-	}
+		put_pixel(game, x, y, rgb_to_int(game->scene.ceiling));
+	draw_wall_stripe(game, ray, x);
+	y = ray->draw_end + 1;
 	while (y < game->height)
 	{
-		put_pixel(game, x, y, floor_c);
+		put_pixel(game, x, y, rgb_to_int(game->scene.floor));
 		y++;
 	}
 }
