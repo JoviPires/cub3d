@@ -30,6 +30,8 @@ int	main(int argc, char **argv)
 	if (parse_file(argv[1], &game.scene))
 		return (1);
 	game_init(&game);
+	if (load_textures(&game))
+		return (1);
 	mlx_hook(game.win, KeyPress, KeyPressMask, &handle_key_press, &game);
 	mlx_hook(game.win, DestroyNotify, StructureNotifyMask,
 		&close_window, &game);
