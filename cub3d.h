@@ -24,6 +24,14 @@
 
 # define BUFFER_SIZE 1024
 # define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.05
 
 typedef struct s_color
 {
@@ -54,6 +62,17 @@ typedef struct s_scene
 	t_map	map;
 }	t_scene;
 
+typedef struct s_tex
+{
+	void	*img;
+	char	*data;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_tex;
+
 typedef struct s_game
 {
 	void	*mlx;
@@ -71,6 +90,7 @@ typedef struct s_game
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+	t_tex	tex[4];
 	t_scene	scene;
 }	t_game;
 
@@ -138,6 +158,12 @@ void	draw_column(t_game *game, t_ray *ray, int x);
 
 /*--- raycasting.c ---*/
 void	cast_rays(t_game *game);
+
+/*--- textures.c ---*/
+int		load_textures(t_game *game);
+int		get_tex_index(t_ray *ray);
+int		get_tex_x(t_game *game, t_ray *ray, int tex_i);
+int		get_tex_pixel(t_tex *tex, int x, int y);
 
 /*--- error.c ---*/
 int		err_exit(char *msg, t_scene *scene);
